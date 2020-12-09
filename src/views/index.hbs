@@ -1,0 +1,57 @@
+<div class="jumbotron mt-4">
+    <h1 class="display-4">Últimos Publicados</h1>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean gravida elit vel libero vulputate, et pretium mi egestas.
+        Sed ac odio maximus, rutrum lorem molestie, bibendum mauris. Sed consequat sollicitudin diam vitae bibendum.
+    </p>
+    <hr class="my-4">
+    <p>
+        Donec lobortis enim mi, vitae molestie felis consectetur et. Phasellus a pellentesque nulla. Proin sed commodo tortor. 
+        Sed dapibus mauris id purus vehicula commodo. Fusce odio odio, condimentum ullamcorper velit non, lobortis blandit ipsum. 
+        Integer sollicitudin congue sapien a aliquet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam a tristique erat. 
+        Cras aliquet mauris porttitor massa laoreet ultrices. In semper nulla sit amet orci dapibus, eget vehicula purus congue.
+    </p>
+    <a href="https://periredondo.com.ve" class="btn btn-primary btn-lg">Periredondo</a>
+</div>
+
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    
+      <!-- On rows -->
+    <tr class="table-secondary">
+        <td>Código</td>
+        <td>Descripción</td>
+        <td>Usuario</td>
+        <td>Estado</td>
+        <td>Entregado</td>
+        <td>Fecha Asignación</td>
+        <td colspan="2"></td>
+    </tr>
+    {{#each articles}}
+    <tr class="table-{{staterelacion.style}}">
+        <td>{{code}}</td>
+        <td>{{title}}</td>
+        <td>{{userrelacion.name}} {{userrelacion.last_name}}</td>
+        <td class="text-center">{{staterelacion.description}}</td>
+        <td class="text-center">{{#if done}} <i class="fas fa-check text-success">{{/if}}</i></td>
+        <td>{{date}}</td>
+        {{#if user_login}}
+        <td>
+            <a href="/articles/edit/{{_id}}"><i class="fas fa-edit" title="Editar"></i></a>
+        </td>
+        <td>
+            <form action="/articles/delete/{{_id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="back_route" value="/">
+                <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar</button>
+            </form>
+        </td>
+        {{else}}
+        <td colspan="2"></td>
+        {{/if}}
+    </tr>
+    {{/each}}
+  </table>
+</div>
+
+
+

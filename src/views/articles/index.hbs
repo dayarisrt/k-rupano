@@ -1,0 +1,35 @@
+<div class="row"><a href="/articles/create"><i class="fas fa-plus"></i></a>
+    {{#each articles}}
+    <div class="col-md-3" style="margin-top:10px">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title d-flex justify-content-between align-items-center">
+                    {{title}} <a href="/articles/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                </h5>
+                <div><img src="{{url_image}}" alt="{{title}}" width="100%"></div>
+                <form action="/articles/done/{{_id}}?_method=PUT" method="POST">
+                    <input type="hidden" name="_method" value="PUT">
+                    <input type="hidden" name="done" value="true">
+                    {{#if done}}
+                    <button class="btn btn-success btn-block btn-sm" disabled type="submit" title="Este artículo ha sido marcado como entregado.">Hecho</button>
+                    {{else}}
+                    <button class="btn btn-dark btn-block btn-sm" type="submit" title="¿Entregaste este arículo? Márcalo como hecho!">Hecho</button>
+                    {{/if}}
+                </form>
+                <form action="/articles/delete/{{_id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{else}}
+        <div class="card mx-auto">
+            <div class="card-body">
+                <h1>Hola</h1>
+                <p class="lead">No hay artículos disponibles</p>
+                <a href="/articles/create" class="btn btn-success btn-block">Crea uno!</a>
+            </div>
+        </div>
+    {{/each}}
+</div>

@@ -1,0 +1,37 @@
+<h1>Listado de Usuarios</h1> <a href="/users/signup"><i class="fas fa-plus"></i></a>
+
+<div class="table-responsive-sm">
+  <table class="table table-hover">
+    
+      <!-- On rows -->
+    <tr class="table-secondary">
+        <td>Nombre</td>
+        <td>Apellido</td>
+        <td>Correo</td>
+        <td colspan="2"></td>
+    </tr>
+    {{#each users}}
+    <tr class="table-light">
+        <td>{{name}}</td>
+        <td>{{last_name}}</td>
+        <td>{{email}}</td>
+        <td>
+            <a href="/users/edit/{{_id}}"><i class="fas fa-edit" title="Editar"></i></a>
+        </td>
+        <td>
+            <form action="/users/delete/{{_id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    {{else}}
+        <tr class="table-light">
+        <td colspan="5">
+            <p class="lead">No hay usuarios disponibles</p>
+            <a href="/users/signup" class="btn btn-success btn-block">Crea uno!</a>
+        </td>
+    </tr>
+    {{/each}}
+  </table>
+</div>

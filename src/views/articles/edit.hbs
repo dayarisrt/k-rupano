@@ -1,0 +1,64 @@
+{{#each errors}}
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  {{text}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+{{/each}}
+
+<div class="col-md-12 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            <h3>Editar Artículo</h3>
+        </div>
+        <div class="card-body">
+            <form action="/articles/update/{{article._id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <label for="code">Código:</label>
+                    <input type="text" name="code" class="form-control" placeholder="Ingrese el código" value="{{article.code}}">
+                </div>
+                <div class="form-group">
+                    <label for="title">Título:</label>
+                    <input type="text" name="title" class="form-control" placeholder="Ingrese el título" value="{{article.title}}">
+                </div>
+                <ul class="list-unstyled">
+                    <li class="media">
+                        <img src="{{article.url_image}}" style="width: 50%;" class="mr-1" alt="...">
+                        <div class="media-body">
+                            <img src="{{article.url_image}}" style="width: 100%;" class="mr-1" alt="...">
+                        </div>
+                    </li>
+                </ul>
+                <div class="form-group">
+                    <label for="url_image">Imagen:</label>
+                    <textarea class="form-control" name="url_image" placeholder="Ingrese la url de la imagen">{{article.url_image}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="user">Asignado a:</label>
+                    <select name="user" class="form-control"> 
+                        {{#each users_list}} 
+                            <option value="{{_id}}" {{optionSelected _id ../article.user}}>{{last_name}} {{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="state">Estado:</label>
+                    <select name="state" class="form-control">
+                        {{#each states}}
+                            <option value="{{_id}}" {{optionSelected _id ../article.state}}>{{description}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

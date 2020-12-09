@@ -1,0 +1,35 @@
+<div class="row"><a href="/states/create"><i class="fas fa-plus"></i></a>
+    <div class="table-responsive-sm">
+  <table class="table table-hover">
+    
+      <!-- On rows -->
+    <tr class="table-secondary">
+        <td>Descripción</td>
+        <td>Estilo</td>
+        <td colspan="2"></td>
+    </tr>
+    {{#each states}}
+    <tr class="table-light">
+        <td>{{description}}</td>
+        <td>{{style}}</td>
+        <td>
+            <a href="/states/edit/{{_id}}"><i class="fas fa-edit" title="Editar"></i></a>
+        </td>
+        <td>
+            <form action="/states/delete/{{_id}}?_method=DELETE" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar</button>
+            </form>
+        </td>
+    </tr>
+    {{else}}
+        <tr class="table-light">
+            <td colspan="3">
+                <p class="lead">No hay estados disponibles</p>
+                <a href="/states/create" class="btn btn-success btn-block">Crea uno!</a>
+            </td>
+        </tr>
+    {{/each}}
+    </table>
+</div>
+</div>
